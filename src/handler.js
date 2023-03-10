@@ -82,10 +82,10 @@ const getBooks = (request, h) => {
 };
 
 const getBooksById = (request, h) => {
-  const { id } = request.params;
+  const { bookId } = request.params;
 
-  // const note = notes.filter((n) => n.bookId === id)[0];
-  const note = notes.find((n) => n.bookId === id);
+  // const note = notes.filter((n) => n.bookId === bookId)[0];
+  const note = notes.find((n) => n.id === bookId);
   if (note) {
     const response = h.response({
       status: "success",
@@ -106,7 +106,7 @@ const getBooksById = (request, h) => {
 };
 
 const editBooksById = (request, h) => {
-  const { id } = request.params;
+  const { bookId} = request.params;
   const updatedAt = new Date().toISOString();
 
   const {
@@ -140,7 +140,7 @@ const editBooksById = (request, h) => {
     return response;
   }
 
-  const index = notes.findIndex((note) => note.id === id);
+  const index = notes.findIndex((note) => note.id === bookId);
 
   if (index !== -1) {
     notes[index] = {
@@ -174,8 +174,8 @@ const editBooksById = (request, h) => {
 
 
 const deleteBooksById = (request, h) => {
-  const { id } = request.params;
-  const index = notes.findIndex((note) => note.bookId === id);
+  const { bookId } = request.params;
+  const index = notes.findIndex((note) => note.id === bookId);
 
   if (index !== -1) {
     notes.splice(index, 1);
